@@ -29,6 +29,7 @@ display:flex;
 gap:2rem;
 justify-content: center;
 flex-flow: wrap;
+max-width: 80%;
 }
 
 .card {
@@ -91,4 +92,12 @@ flex-flow: wrap;
         color: #324B4D;
         margin-bottom:2rem;
       }
+  
+
+  .formCont{
+    display: grid;
+    grid-template-rows:repeat(5,1fr);
+    grid-template-columns: 1fr 1fr;
+    max-width: 80%;
+    margin: auto;
   }
