@@ -28,15 +28,21 @@ add.addEventListener("click", () => {
   const title = document.querySelector("#title").value;
   const author = document.querySelector("#author").value;
   const pages = parseInt(document.querySelector("#pages").value);
-  const read = document.querySelectorAll("[name='read']").checked;
-
-
-  let book = new Book(image, title, author, pages, read);
-
   
-  addBook(book);
+  // Get the selected radio button's id
+  let selectedId = null;
+  const readRadioButtons = document.querySelectorAll("[name='read']");
+  readRadioButtons.forEach(radioButton => {
+    if (radioButton.checked) {
+        selectedId = radioButton.id;
+    }
+  });
 
- 
+  let book = new Book(image, title, author, pages, selectedId); // Use selectedId here
+
+  addBook(book);  
+
+  // Clear form inputs
   const inputs = document.querySelectorAll("input");
   inputs.forEach(input => {
       if (input.type === "checkbox" || input.type === "radio") {
@@ -48,8 +54,9 @@ add.addEventListener("click", () => {
       }
   });
 
-
+  updateLibrary()
   formCont.style.display = "none";
+  container.style.filter = "none";
 });
 
 
@@ -59,6 +66,43 @@ addBookButton.addEventListener("click",() =>{
   formCont.style.display="grid";
 //
 })
+
+
+function updateLibrary(){
+  const booksContainer = document.querySelector(".booksContainer");
+
+  // Clear existing content in the container
+  booksContainer.innerHTML = "";
+
+  // Loop through the array and create HTML elements for each book
+  myLibrary.forEach((book, index) => {
+    const bookCard = document.createElement("div");
+    bookCard.classList.add("card");
+
+    const bookImage = document.createElement("img");
+    bookImage.classList.add("bookImage");
+    bookImage.style.backgroundImage = `url(${book.image})`;
+
+    const title = document.createElement("div");
+    title.classList.add("title");
+    title.textContent = book.title;
+
+    const author = document.createElement("div");
+    author.classList.add("author");
+    author.textContent = book.author;
+
+    const pages = document.createElement("div");
+    pages.classList.add("pages");
+    pages.textContent = `${book.pages} pages`;
+
+    bookCard.appendChild(bookImage);
+    bookCard.appendChild(title);
+    bookCard.appendChild(author);
+    bookCard.appendChild(pages);
+
+    booksContainer.appendChild(bookCard);
+  });
+}
 
 
 /*
