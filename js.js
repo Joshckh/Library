@@ -9,7 +9,7 @@ const myLibrary = [];
 
 
 function Book(image, title,author,pages,read) {
-    this.image = createImageBitmap
+    this.image = image
     this.title = title
     this.author = author
     this.pages = pages
@@ -21,7 +21,7 @@ function addBook(book){
     myLibrary.push(book)
 }
 
-console.log
+
 
 add.addEventListener("click", () => {
   const image = document.querySelector("#image").files[0]; 
@@ -68,7 +68,7 @@ addBookButton.addEventListener("click",() =>{
 })
 
 
-function updateLibrary(){
+function updateLibrary() {
   const booksContainer = document.querySelector(".booksContainer");
 
   // Clear existing content in the container
@@ -79,9 +79,15 @@ function updateLibrary(){
     const bookCard = document.createElement("div");
     bookCard.classList.add("card");
 
-    const bookImage = document.createElement("img");
+    const bookImage = document.createElement("div");
     bookImage.classList.add("bookImage");
-    bookImage.style.backgroundImage = `url(${book.image})`;
+    
+    // Create an <img> element and set its src attribute
+    const imgElement = document.createElement("img");
+    imgElement.src = URL.createObjectURL(book.image);
+    imgElement.alt = book.title; // Add alt text if needed
+    
+    bookImage.appendChild(imgElement);
 
     const title = document.createElement("div");
     title.classList.add("title");
@@ -103,18 +109,3 @@ function updateLibrary(){
     booksContainer.appendChild(bookCard);
   });
 }
-
-
-/*
-let book1 = {
-  title:"The Hobbit",
-  author:"tolken",
-  pages:365,
-  read:true
-}
-
-addBook(book1)
-
-console.log(myLibrary)
-
-*/
