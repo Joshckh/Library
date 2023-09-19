@@ -145,4 +145,13 @@ max-width: 80%;
 }
 
 
- 
+ .deleteButton{
+  padding: 0.8rem 2.2rem;
+  border-radius: 10px;
+  border: 0;
+  letter-spacing: 0.05rem;
+  background-color: rgb(255, 56, 86);
+  font-size: 0.8rem;
+  color: hsl(0, 0%, 100%);
+  margin-top: 0.5rem;
+ }
