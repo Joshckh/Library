@@ -1,12 +1,11 @@
 // Select DOM elements
-const formCont = document.querySelector(".formCont");
-const addBookButton = document.querySelector(".addBook");
-const add = document.querySelector("#add");
-const inputs = document.querySelectorAll("input");
-const container = document.querySelector(".container");
-const removeButtons = document.querySelectorAll(".deleteButton");
-const card = document.querySelector(".card");
-const deleteButtons = document.querySelectorAll(".deleteButton");
+const formCont = document.querySelector(".formCont"); // Selects the form container
+const addBookButton = document.querySelector(".addBook"); // Selects the "Add Book" button
+const add = document.querySelector("#add"); // Selects the "Add" button inside the form
+const inputs = document.querySelectorAll("input"); // Selects all input elements
+const container = document.querySelector(".container"); // Selects the container element
+const removeButtons = document.querySelectorAll(".deleteButton"); // Selects all "Remove" buttons
+const deleteButtons = document.querySelectorAll(".deleteButton"); // Selects all "Delete" buttons
 
 // Create an array to store books
 const myLibrary = [];
@@ -25,6 +24,7 @@ function addBook(book) {
   myLibrary.push(book);
 }
 
+// Function to delete a book from the library
 function delBook(title) {
   // Ask for confirmation
   const confirmed = confirm(`Are you sure you want to remove the book "${title}"?`);
@@ -42,7 +42,6 @@ function delBook(title) {
   }
 }
 
-
 // Function to update the library display
 function updateLibrary() {
   const booksContainer = document.querySelector(".booksContainer");
@@ -51,7 +50,7 @@ function updateLibrary() {
   booksContainer.innerHTML = "";
 
   // Loop through the array and create HTML elements for each book
-  myLibrary.forEach((book, index) => {
+  myLibrary.forEach((book,index) => {
     const bookCard = document.createElement("div");
     bookCard.classList.add("card");
 
@@ -59,7 +58,7 @@ function updateLibrary() {
     bookImage.classList.add("bookImage");
 
     if (book.image) {
-      // Create an <img> element and set its src attribute if image exists
+      // Create an <img> element and set its src attribute if an image exists
       const imgElement = document.createElement("img");
       imgElement.src = book.image;
       imgElement.alt = book.title; // Add alt text if needed
@@ -78,29 +77,39 @@ function updateLibrary() {
     pages.classList.add("pages");
     pages.textContent = `${book.pages} pages`;
 
-    const delButton = document.createElement("button")
-    delButton.classList.add("deleteButton")
-    delButton.textContent = "Remove"
+    const delButton = document.createElement("button");
+    delButton.classList.add("deleteButton");
+    delButton.textContent = "Remove";
     delButton.addEventListener("click", (event) => {
       // Get the book title associated with the clicked button
       const bookTitle = event.target.parentElement.querySelector(".title").textContent;
-  
+
       // Call the delBook function to remove the book by title
       delBook(bookTitle);
     });
-  
+
+    const readStatus = document.createElement("button"); // Element for displaying read status
+    if( myLibrary[index].read == true){
+      readStatus.classList="statusRead"
+    }
+    else{
+      readStatus.classList="statusNotRead"
+    }
+
+    // Append elements to the book card
     bookCard.appendChild(bookImage);
     bookCard.appendChild(title);
     bookCard.appendChild(author);
     bookCard.appendChild(pages);
-    bookCard.appendChild(delButton)
+    bookCard.appendChild(delButton);
+    bookCard.appendChild(readStatus);
 
+    // Append the book card to the books container
     booksContainer.appendChild(bookCard);
   });
 }
 
-
-// Event listener for the "Add" button click
+  /// Event listener for the "Add" button click
 add.addEventListener("click", () => {
   // Get values from form inputs
   const imageInput = document.querySelector("#image");
@@ -118,8 +127,14 @@ add.addEventListener("click", () => {
     }
   });
 
-  // Create a new Book object
-  let book = new Book(null, title, author, pages, selectedId); // Default to null for image
+  // Determine the read status based on the selected radio button
+  let readStatus = false; // Default to false
+  if (selectedId === "true") {
+    readStatus = true;
+  }
+
+  // Create a new Book object with the read status
+  let book = new Book(null, title, author, pages, readStatus); // Default to null for image
 
   // Check if an image has been selected
   if (image) {

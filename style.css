@@ -155,3 +155,11 @@ max-width: 80%;
   color: hsl(0, 0%, 100%);
   margin-top: 0.5rem;
  }
+
+ .statusRead{
+  border:solid green 2px
+ }
+
+ .statusNotRead{
+  border:solid red 2px
+ }
