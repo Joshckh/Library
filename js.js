@@ -55,7 +55,7 @@ function updateLibrary() {
   booksContainer.innerHTML = "";
 
   // Loop through the array and create HTML elements for each book
-  myLibrary.forEach((book,index) => {
+  myLibrary.forEach((book, index) => {
     const bookCard = document.createElement("div");
     bookCard.classList.add("card");
 
@@ -105,7 +105,7 @@ function updateLibrary() {
     } else {
       readStatus.classList.add("statusNotRead");
       readStatus.textContent = "Not Read";
-}
+    }
 
     // Append elements to the book card
     bookCard.appendChild(bookImage);
@@ -120,7 +120,7 @@ function updateLibrary() {
   });
 }
 
-  /// Event listener for the "Add" button click
+// Event listener for the "Add" button click
 add.addEventListener("click", () => {
   // Get values from form inputs
   const imageInput = document.querySelector("#image");
