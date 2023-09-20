@@ -42,6 +42,11 @@ function delBook(title) {
   }
 }
 
+function toggleReadStatus(index) {
+  myLibrary[index].read = !myLibrary[index].read; // Toggle the read status
+  updateLibrary(); // Update the library display to reflect the changes
+}
+
 // Function to update the library display
 function updateLibrary() {
   const booksContainer = document.querySelector(".booksContainer");
@@ -88,13 +93,19 @@ function updateLibrary() {
       delBook(bookTitle);
     });
 
-    const readStatus = document.createElement("button"); // Element for displaying read status
-    if( myLibrary[index].read == true){
-      readStatus.classList="statusRead"
-    }
-    else{
-      readStatus.classList="statusNotRead"
-    }
+    const readStatus = document.createElement("button");
+    readStatus.addEventListener("click", () => {
+      toggleReadStatus(index); // Call the function to toggle the read status
+    });
+
+    // Initialize the button text and class based on the initial read status
+    if (myLibrary[index].read === true) {
+      readStatus.classList.add("statusRead");
+      readStatus.textContent = "Read";
+    } else {
+      readStatus.classList.add("statusNotRead");
+      readStatus.textContent = "Not Read";
+}
 
     // Append elements to the book card
     bookCard.appendChild(bookImage);

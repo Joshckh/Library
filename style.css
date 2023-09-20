@@ -157,9 +157,38 @@ max-width: 80%;
  }
 
  .statusRead{
-  border:solid green 2px
+  font-family: inherit;
+  display: inline-block;
+  width: 8em;
+  height: 2.6em;
+  line-height: 2.5em;
+  margin: 20px;
+  position: relative;
+  overflow: hidden;
+  font-size: 17px;
+  border-radius: 6px;
+  border-color: #79f77f;
+  font-weight: 500;
+  box-shadow: 0 0 2rem #79f77f ;
  }
 
  .statusNotRead{
-  border:solid red 2px
+
+  font-family: inherit;
+  display: inline-block;
+  width: 8em;
+  height: 2.6em;
+  line-height: 2.5em;
+  margin: 20px;
+  position: relative;
+  overflow: hidden;
+  font-size: 17px;
+  border-radius: 6px;
+  border-color: #ec1d1d;
+  font-weight: 500;
+  box-shadow: 0 0 2rem #ec1d1d ;
  }
+ }
+
+
+ 
